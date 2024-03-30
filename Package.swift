@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.10
 
 import PackageDescription
 
@@ -9,6 +9,7 @@ let package = Package(
 		.macCatalyst(.v13),
 		.iOS(.v13),
 		.tvOS(.v13),
+		.visionOS(.v1),
 	],
 	products: [
 		.library(name: "Textbook", targets: ["Textbook"]),
