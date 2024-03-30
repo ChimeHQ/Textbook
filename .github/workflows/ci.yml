@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'CODE_OF_CONDUCT.md'
+      - '.editorconfig'
+      - '.spi.yml'
+  pull_request:
+    branches:
+      - main
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
+
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-13
+    strategy:
+      matrix:
+        destination:
+          - "platform=macOS"
+          - "platform=macOS,variant=Mac Catalyst"
+          - "platform=iOS Simulator,name=iPhone 11"
+          - "platform=tvOS Simulator,name=Apple TV"
+          - "platform=visionOS Simulator,name=Apple Vision Pro"
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test platform ${{ matrix.destination }}
+        run: set -o pipefail && xcodebuild -scheme Textbook -destination "${{ matrix.destination }}" test | xcbeautify
