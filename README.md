@@ -18,6 +18,16 @@ dependencies: [
 ],
 ```
 
+## Usage
+
+### `BaseTextView`
+
+This is an `NSTextView` subclass that aims for an absolute minimal amount of changes. Things are allowed only if they are required for correct functionality. It is intended to be a drop-in replacement for `NSTextView`, and should maintain compatibilty with existing subclasses. Behaviors are appropriate for all types of text.
+
+- Additional routing to `NSTextViewDelegate.textView(_:, doCommandBy:) -> Bool`:  `paste`, `pasteAsRichText`, `pasteAsPlainText`
+- Hooks for `onKeyDown`, `onFlagsChanged`, `onMouseDown`
+- Configurable selection notifcation delivery via `continuousSelectionNotifications`
+
 ## Contributing and Collaboration
 
 I would love to hear from you! Issues or pull requests work great. A [Discord server][discord] is also available for live help, but I have a strong bias towards answering in the form of documentation.
