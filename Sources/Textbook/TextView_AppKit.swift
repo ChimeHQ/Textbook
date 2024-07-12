@@ -5,13 +5,14 @@ import AppKit
 
 @MainActor
 public struct TextView: NSViewRepresentable {
-	private var makeTextView: () -> NSTextView
+	public typealias TextViewProvider = () -> NSTextView
+	private var makeTextView: TextViewProvider
 
 	@Binding public var text: String
 
 	public init(
 		text: Binding<String>,
-		makeTextView: @escaping () -> NSTextView = { NSTextView() }
+		makeTextView: @escaping TextViewProvider = { NSTextView() }
 	) {
 		self._text = text
 		self.makeTextView = makeTextView
