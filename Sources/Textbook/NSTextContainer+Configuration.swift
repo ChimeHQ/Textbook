@@ -4,7 +4,7 @@ import AppKit
 import UIKit
 #endif
 
-@available(macOS 12.0, *)
+@available(macOS 12.0, macCatalyst 15.0, iOS 15.0, tvOS 15.0, *)
 extension NSTextContainer {
 	public static var defaultTextKit2Container: NSTextContainer {
 		let textContainer = NSTextContainer(size: CGSize(width: 1000.0, height: 1.0e7))
