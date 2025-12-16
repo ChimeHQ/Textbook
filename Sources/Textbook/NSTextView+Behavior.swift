@@ -40,9 +40,31 @@ extension NSTextView {
 			// automatically
 			if newValue {
 				let newSize = NSSize(width: maximumUsableWidth, height: frame.height)
-
+				
 				self.frame = NSRect(origin: frame.origin, size: newSize)
 			}
+		}
+	}
+
+	/// Set up the view for standard horizontal scrolling behavior.
+	public func configureForHorizontalScrolling() {
+		// scrolling and resizing
+		isVerticallyResizable = true
+		isHorizontallyResizable = true
+		textContainer?.widthTracksTextView = true
+		textContainer?.heightTracksTextView = false
+		minSize = NSSize.zero
+		maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+
+		// behaviors
+		allowsUndo = true
+
+		if #available(macOS 12.0, *) {
+			if textLayoutManager == nil {
+				layoutManager?.allowsNonContiguousLayout = true
+			}
+		} else {
+			layoutManager?.allowsNonContiguousLayout = true
 		}
 	}
 }
